@@ -7,9 +7,12 @@ import frc.robot.RobotContainer;
 
 public class DriveSWERVE extends CommandBase {
     XboxController driveCtrl;
+    public boolean fieldOriented = false;
 
-    public DriveSWERVE() {
+    public DriveSWERVE(XboxController driveCtrl, boolean fieldOriented) {
         addRequirements(RobotContainer.drivetrain);
+
+        this.driveCtrl = driveCtrl;
     }
 
     @Override
@@ -20,8 +23,7 @@ public class DriveSWERVE extends CommandBase {
         RobotContainer.drivetrain.drive(
             MathUtil.applyDeadband(driveCtrl.getLeftX(), 0.05),
             MathUtil.applyDeadband(driveCtrl.getLeftY(), 0.05),
-            MathUtil.applyDeadband(driveCtrl.getRightX(), 0.05), true);
-    }
+            MathUtil.applyDeadband(driveCtrl.getRightX(), 0.05), fieldOriented);}
 
     @Override
     public void end(boolean interrupted) {}

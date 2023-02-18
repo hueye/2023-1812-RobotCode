@@ -51,31 +51,34 @@ public class Drivetrain extends SubsystemBase {
       
     @Override
     public void periodic() {
-        odometry.update(
-        gyro.getRotation2d(),
-            new SwerveModulePosition[] {
-                  fL.getPosition(),
-                  fR.getPosition(),
-                  bL.getPosition(),
-                  bR.getPosition()
-              });
-          SmartDashboard.putNumber("gyro",gyro.getRotation2d().getDegrees());
-        }
+      odometry.update(
+      gyro.getRotation2d(),
+          new SwerveModulePosition[] {
+              fL.getPosition(),
+              fR.getPosition(),
+              bL.getPosition(),
+              bR.getPosition()
+  });
+  
+  SmartDashboard.putNumber("gyro",gyro.getRotation2d().getDegrees());
+}
  
-        public Pose2d getPose() {
-          return odometry.getPoseMeters();
-        }
+  public Pose2d getPose() {
+        return odometry.getPoseMeters();
+      }
 
-        public void resetOdometry(Pose2d pose) {
-          odometry.resetPosition(
-              gyro.getRotation2d(),
-              new SwerveModulePosition[] {
-                  fL.getPosition(),
-                  fR.getPosition(),
-                  bL.getPosition(),
-                  bR.getPosition()
+  public void resetOdometry(Pose2d pose) {
+     odometry.resetPosition(
+       gyro.getRotation2d(),
+
+         new SwerveModulePosition[] {
+            fL.getPosition(),
+            fR.getPosition(),
+            bL.getPosition(),
+            bR.getPosition()
               },
-              pose);
+
+            pose);
         }
       
         public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
@@ -88,12 +91,14 @@ public class Drivetrain extends SubsystemBase {
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
         SwerveDriveKinematics.desaturateWheelSpeeds(
+            
             swerveModuleStates, Constants.kMaxSpeedMetersPerSecond);
-        fL.setDesiredState(swerveModuleStates[0]);
-        fR.setDesiredState(swerveModuleStates[1]);
-        bL.setDesiredState(swerveModuleStates[2]);
-        bR.setDesiredState(swerveModuleStates[3]);
-        if(fieldRelative)
+                fL.setDesiredState(swerveModuleStates[0]);
+                fR.setDesiredState(swerveModuleStates[1]);
+                bL.setDesiredState(swerveModuleStates[2]);
+                bR.setDesiredState(swerveModuleStates[3]);
+        
+    if(fieldRelative)
         {
           SmartDashboard.putString("Orientation", "Field Oriented");
         }

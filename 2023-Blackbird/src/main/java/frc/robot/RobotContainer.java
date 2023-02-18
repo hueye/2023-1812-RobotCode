@@ -5,13 +5,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Claw.ClawHORIZONTAL;
 import frc.robot.commands.Claw.ClawVERTICAL;
 import frc.robot.commands.Compressor.CompressACTIVE;
-import frc.robot.commands.Drivetrain.DriveSWERVE;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Compress;
@@ -36,6 +37,8 @@ public class RobotContainer {
     public static XboxController operatorController;
 
     public static XboxController driverController;
+
+    boolean fieldOriented = false;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -64,7 +67,17 @@ public class RobotContainer {
       
       new JoystickButton(operatorController, XboxController.Button.kB.value).whileTrue(new ClawVERTICAL());
   
-      new JoystickButton(driverController, XboxController.Button.kLeftBumper.value).onTrue(new DriveSWERVE());
+
+    new JoystickButton(driverController, XboxController.Button.kRightBumper.value)
+        .whileTrue(new RunCommand(() -> drivetrain.setX(),
+            drivetrain));
+
+    new JoystickButton(driverController, XboxController.Button.kLeftBumper.value)
+        .onTrue(new InstantCommand(() -> fieldOriented = !fieldOriented));
+
+    new JoystickButton(driverController, XboxController.Button.kStart.value)
+        .onTrue(new InstantCommand(() -> drivetrain.zeroHeading(),
+            drivetrain));
 
   }
 }
