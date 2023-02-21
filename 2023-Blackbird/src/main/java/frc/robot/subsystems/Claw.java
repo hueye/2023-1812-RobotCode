@@ -5,6 +5,10 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+//The claw has two solenoids - one operating the claw to close and open it, and one to
+//move it up and down. The values may need to be adjusted, as they do not have finite
+//values to move in and out or up and down.
+
 public class Claw extends SubsystemBase {
     
     public DoubleSolenoid miniClawSolenoid;

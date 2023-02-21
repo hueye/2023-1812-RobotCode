@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.Arm.ArmACTIVE;
 import frc.robot.commands.Claw.ClawHORIZONTAL;
 import frc.robot.commands.Claw.ClawVERTICAL;
 import frc.robot.commands.Compressor.CompressACTIVE;
@@ -49,7 +50,7 @@ public class RobotContainer {
     
     driverController = new XboxController(Constants.CTRL_FOR_OPERATOR_ID);
 
-    //default commands
+    //Default commands
     compressorSystem.setDefaultCommand(new CompressACTIVE());
   }
 
@@ -63,16 +64,20 @@ public class RobotContainer {
    * joysticks}.
    */
   public void configureBindings() {
-      new JoystickButton(operatorController, XboxController.Button.kA.value).whileTrue(new ClawHORIZONTAL());
-      
-      new JoystickButton(operatorController, XboxController.Button.kB.value).whileTrue(new ClawVERTICAL());
-  
 
+//Operator controller (claw & arm)
+    new JoystickButton(operatorController, XboxController.Button.kA.value).whileTrue(new ClawHORIZONTAL());
+      
+    new JoystickButton(operatorController, XboxController.Button.kB.value).whileTrue(new ClawVERTICAL());
+  
+    new JoystickButton(operatorController, XboxController.Button.kX.value).whileTrue(new ArmACTIVE());
+
+//Driver Controller (swerve)
     new JoystickButton(driverController, XboxController.Button.kRightBumper.value)
         .whileTrue(new RunCommand(() -> drivetrain.setX(),
             drivetrain));
 
-    new JoystickButton(driverController, XboxController.Button.kLeftBumper.value)
+            new JoystickButton(driverController, XboxController.Button.kLeftBumper.value)
         .onTrue(new InstantCommand(() -> fieldOriented = !fieldOriented));
 
     new JoystickButton(driverController, XboxController.Button.kStart.value)

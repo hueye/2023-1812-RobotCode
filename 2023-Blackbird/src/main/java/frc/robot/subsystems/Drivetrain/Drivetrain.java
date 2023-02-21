@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
-    
+
+//Declaring swerve modules on the robot
+//fL = front left, fR = front right, bL = back left, bR = back right
     final SwerveModule fL = new SwerveModule(
         Constants.kFrontLeftDrivingCanId,
         Constants.kFrontLeftTurningCanId,
@@ -35,6 +37,7 @@ public class Drivetrain extends SubsystemBase {
         Constants.kRearRightTurningCanId,
         Constants.kBackRightChassisAngularOffset);
 
+//Gyro for the drivetrain
     final WPI_Pigeon2 gyro = new WPI_Pigeon2(Constants.pigeonid);
 
     SwerveDriveOdometry odometry = new SwerveDriveOdometry(
@@ -46,9 +49,8 @@ public class Drivetrain extends SubsystemBase {
             bL.getPosition(),
             bR.getPosition(),
         });
-        
-    public void DriveSubsystem() {}
-      
+       
+//Finding position of the robot
     @Override
     public void periodic() {
       odometry.update(
@@ -60,7 +62,7 @@ public class Drivetrain extends SubsystemBase {
               bR.getPosition()
   });
   
-  SmartDashboard.putNumber("gyro",gyro.getRotation2d().getDegrees());
+  SmartDashboard.putNumber("gyro", gyro.getRotation2d().getDegrees());
 }
  
   public Pose2d getPose() {
@@ -77,10 +79,10 @@ public class Drivetrain extends SubsystemBase {
             bL.getPosition(),
             bR.getPosition()
               },
-
             pose);
         }
-      
+
+//Drive subsystem - called in the swerve command
         public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
           xSpeed *= Constants.kMaxSpeedMetersPerSecond;
           ySpeed *= Constants.kMaxSpeedMetersPerSecond;
@@ -97,13 +99,11 @@ public class Drivetrain extends SubsystemBase {
                 fR.setDesiredState(swerveModuleStates[1]);
                 bL.setDesiredState(swerveModuleStates[2]);
                 bR.setDesiredState(swerveModuleStates[3]);
-        
+
     if(fieldRelative)
         {
           SmartDashboard.putString("Orientation", "Field Oriented");
-        }
-        else
-        {
+        } else {
           SmartDashboard.putString("Orientation", "Robot Oriented");
         }
       }
@@ -142,5 +142,7 @@ public class Drivetrain extends SubsystemBase {
         public double getTurnRate() {
           return gyro.getRate() * (Constants.kGyroReversed ? -1.0 : 1.0);
         }
+
+      
       }
       

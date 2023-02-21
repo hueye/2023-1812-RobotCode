@@ -7,7 +7,7 @@ import frc.robot.RobotContainer;
 
 public class DriveSWERVE extends CommandBase {
     XboxController driveCtrl;
-    public boolean fieldOriented = false;
+    boolean fieldOriented = false;
 
     public DriveSWERVE(XboxController driveCtrl, boolean fieldOriented) {
         addRequirements(RobotContainer.drivetrain);

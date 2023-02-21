@@ -2,14 +2,17 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
     
-    public DoubleSolenoid leftArmSolenoid;
+    //The arm has two solenoids on either side. 
+    
+    public static DoubleSolenoid leftArmSolenoid;
 
-    public DoubleSolenoid rightArmSolenoid;
+    public static DoubleSolenoid rightArmSolenoid;
 
     public Arm() {
         leftArmSolenoid = new DoubleSolenoid(
@@ -33,8 +36,18 @@ public class Arm extends SubsystemBase {
     @Override
     public void simulationPeriodic() {}
 
-    public void toggleArm() {
+    public static void Extended() {
+        leftArmSolenoid.set(Value.kForward);
+        rightArmSolenoid.set(Value.kForward);
+    }
+
+    public static void Retracted() {
+        leftArmSolenoid.set(Value.kReverse);
+        rightArmSolenoid.set(Value.kReverse);
+    }
+
+    /*public void toggleArm() {
         leftArmSolenoid.toggle();
         rightArmSolenoid.toggle();
-    }
+    }*/
 }

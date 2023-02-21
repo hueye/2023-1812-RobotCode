@@ -8,7 +8,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 
 /**
@@ -24,25 +23,25 @@ public final class Constants {
     public static final int CTRL_FOR_DRIVER_ID = 0;
     public static final int CTRL_FOR_OPERATOR_ID = 1;
 
-    /*compressor constants*/
+    /*Compressor constants*/
     public static final int COMPRESSOR_ID = 2;
 
-    /*claw constants*/
-    /*mini piston used to open & close claw*/
+    /*Claw constants*/
+    /*Mini piston used to open & close claw*/
     public static final int CLAW_OUT_CHANNEL = 1;
     public static final int CLAW_IN_CHANNEL = 0;
 
-    /*big piston on the claw*/
+    /*Big piston on the claw*/
     public static final int CLAW_EXTEND_SOLENOID_CHANNEL = 2;
     public static final int CLAW_RETRACT_SOLENOID_CHANNEL = 3;
 
-    /*arm constants*/
+    /*Arm constants*/
     public static final int LEFT_ARM_EXTEND_CHANNEL = 4;
     public static final int LEFT_ARM_RETRACT_CHANNEL = 5;
     public static final int RIGHT_ARM_EXTEND_CHANNEL = 6;
     public static final int RIGHT_ARM_RETRACT_CHANNEL = 7;
 
-    /*drivetrain constants*/
+    /*Drivetrain constants*/
     public static final int pigeonid = 9;
     public static final double kMaxSpeedMetersPerSecond = 2;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
@@ -73,17 +72,17 @@ public final class Constants {
 
     public static final boolean kGyroReversed = false;
 
-    /*swerve module constants*/
+    /*Swerve module constants*/
     public static final int kDrivingMotorPinionTeeth = 13;
 
     public static final boolean kTurningEncoderInverted = true;
 
-    // Calculations required for driving motor conversion factors and feed forward
+    //Calculations required for driving motor conversion factors and feed forward
     public static final double kDrivingMotorFreeSpeedRps = Constants.kFreeSpeedRpm / 60;
     public static final double kFreeSpeedRpm = 5676;
     public static final double kWheelDiameterMeters = 0.0762;
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
-    // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15 teeth on the bevel pinion
+    //45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15 teeth on the bevel pinion
     public static final double kDrivingMotorReduction = (45.0 * 22) / (kDrivingMotorPinionTeeth * 15);
     public static final double kDriveWheelFreeSpeedRps = (kDrivingMotorFreeSpeedRps * kWheelCircumferenceMeters)
         / kDrivingMotorReduction;
@@ -118,22 +117,5 @@ public final class Constants {
 
     public static final int kDrivingMotorCurrentLimit = 50; // amps
     public static final int kTurningMotorCurrentLimit = 20; // amps
-  
 
-  //OI Constants
-    public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 1;
-
-  //Auto Constants
-    public static final double kMaxAccelerationMetersPerSecondSquared = 1.5;
-    public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
-    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
-
-    public static final double kPXController = 1;
-    public static final double kPYController = 1;
-    public static final double kPThetaController = 1;
-
-    // Constraint for the motion profiled robot angle controller
-    public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
-        kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
   }
