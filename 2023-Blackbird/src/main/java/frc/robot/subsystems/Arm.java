@@ -36,12 +36,12 @@ public class Arm extends SubsystemBase {
     @Override
     public void simulationPeriodic() {}
 
-    public static void Extended() {
+    public void Extended() {
         leftArmSolenoid.set(Value.kForward);
         rightArmSolenoid.set(Value.kForward);
     }
 
-    public static void Retracted() {
+    public void Retracted() {
         leftArmSolenoid.set(Value.kReverse);
         rightArmSolenoid.set(Value.kReverse);
     }
