@@ -40,7 +40,6 @@ public final class Constants {
     public static final int LEFT_ARM_RETRACT_CHANNEL = 5;
     public static final int RIGHT_ARM_EXTEND_CHANNEL = 6;
     public static final int RIGHT_ARM_RETRACT_CHANNEL = 7;
-
     /*Drivetrain constants*/
     public static final int pigeonid = 9;
     public static final double kMaxSpeedMetersPerSecond = 2;

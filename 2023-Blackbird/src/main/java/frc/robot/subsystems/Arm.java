@@ -45,9 +45,4 @@ public class Arm extends SubsystemBase {
         leftArmSolenoid.set(Value.kReverse);
         rightArmSolenoid.set(Value.kReverse);
     }
-
-    /*public void toggleArm() {
-        leftArmSolenoid.toggle();
-        rightArmSolenoid.toggle();
-    }*/
 }
